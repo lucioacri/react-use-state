@@ -1,8 +1,10 @@
 import { useState } from "react";
 import languages from "../data/languages";
+import Card from "./Card";
 
 export default function Main() {
-  const [clickedLanguage, setClickedLanguage] = useState(-1);
+  const [clickedLanguage, setClickedLanguage] = useState(0);
+  // const [card, setCard] = useState(false);
 
   return (
     <main>
@@ -25,16 +27,8 @@ export default function Main() {
           </div>
         </div>
       </div>
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <div className="card">
-              <h1>{languages[clickedLanguage].title}</h1>
-              <h1>{languages[clickedLanguage].description}</h1>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <Card language={languages[clickedLanguage]} />
     </main>
   );
 }
