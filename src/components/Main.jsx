@@ -4,7 +4,6 @@ import Card from "./Card";
 
 export default function Main() {
   const [clickedLanguage, setClickedLanguage] = useState(0);
-  // const [card, setCard] = useState(false);
 
   return (
     <main>
@@ -16,7 +15,11 @@ export default function Main() {
                 <button
                   className="btn btn-primary"
                   onClick={() => {
-                    setClickedLanguage(index);
+                    if (clickedLanguage === index) {
+                      setClickedLanguage(-1);
+                    } else {
+                      setClickedLanguage(index);
+                    }
                   }}
                   key={language.id}
                 >
@@ -27,8 +30,7 @@ export default function Main() {
           </div>
         </div>
       </div>
-
-      <Card language={languages[clickedLanguage]} />
+      {clickedLanguage >= 0 && <Card language={languages[clickedLanguage]} />}
     </main>
   );
 }
