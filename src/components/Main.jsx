@@ -1,36 +1,34 @@
 import { useState } from "react";
 import languages from "../data/languages";
 import Card from "./Card";
+import Buttons from "./Buttons";
 
 export default function Main() {
-  const [clickedLanguage, setClickedLanguage] = useState(0);
+  const [clickedLanguageIndex, setClickedLanguageIndex] = useState(0);
+  const handleButtonClick = (index) => {
+    if (clickedLanguageIndex === index) {
+      setClickedLanguageIndex(-1);
+    } else {
+      setClickedLanguageIndex(index);
+    }
+  };
 
   return (
     <main>
-      <div className="container">
+      <div className="container text-center">
         <div className="row">
-          <div className="col">
-            {languages.map((language, index) => {
-              return (
-                <button
-                  className="btn btn-primary"
-                  onClick={() => {
-                    if (clickedLanguage === index) {
-                      setClickedLanguage(-1);
-                    } else {
-                      setClickedLanguage(index);
-                    }
-                  }}
-                  key={language.id}
-                >
-                  {language.title}
-                </button>
-              );
-            })}
-          </div>
+          {languages.map((language, index) => (
+            <Buttons
+              key={language.id}
+              title={language.title}
+              onClick={() => handleButtonClick(index)}
+            />
+          ))}
         </div>
       </div>
-      {clickedLanguage >= 0 && <Card language={languages[clickedLanguage]} />}
+      {clickedLanguageIndex >= 0 && (
+        <Card language={languages[clickedLanguageIndex]} />
+      )}
     </main>
   );
 }
